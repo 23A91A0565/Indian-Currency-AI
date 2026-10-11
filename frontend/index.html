@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>RupeeLens 🇮🇳 | Indian Currency Classifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">₹</div>
+      <div class="brand-title">RupeeLens AI</div>
+    </div>
+    <div class="badge-series">
+      <div class="badge-dot"></div>
+      Mahatma Gandhi Series
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container">
+    <!-- Viewfinder & Camera / File Upload -->
+    <div class="viewfinder-card">
+      <div class="viewfinder-viewport" id="viewport">
+        <img id="previewImg" alt="Banknote Preview">
+        <div class="placeholder-content" id="placeholder">
+          <div class="placeholder-icon">📸</div>
+          <div class="placeholder-text">Capture or Upload Banknote</div>
+          <div class="placeholder-sub">Supports ₹10, ₹20, ₹50, ₹100, ₹200, ₹500</div>
+        </div>
+        <div class="scanner-reticle" id="reticle"></div>
+        <div class="scanline" id="scanline"></div>
+      </div>
+
+      <!-- Accessible file inputs (visually hidden to ensure full mobile browser compatibility) -->
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" class="visually-hidden">
+      <input type="file" id="fileInput" accept="image/*" class="visually-hidden">
+
+      <!-- Action Controls (Native labels directly trigger the OS camera sheet on iOS & Android) -->
+      <div class="controls-grid">
+        <label class="btn btn-camera" for="cameraInput" id="btnCamera" role="button" tabindex="0">
+          <span>📷</span> Snap Camera
+        </label>
+        <label class="btn btn-upload" for="fileInput" id="btnUpload" role="button" tabindex="0">
+          <span>📁</span> Select Photo
+        </label>
+      </div>
+
+      <!-- Error Notification Toast -->
+      <div class="error-toast" id="errorToast" style="display: none;"></div>
+
+      <!-- Quick Demo Samples Bar -->
+      <div class="demo-bar">
+        <span class="demo-label">Quick Test:</span>
+        <div class="demo-pill" onclick="loadSample('10')">₹10</div>
+        <div class="demo-pill" onclick="loadSample('20')">₹20</div>
+        <div class="demo-pill" onclick="loadSample('50')">₹50</div>
+        <div class="demo-pill" onclick="loadSample('100')">₹100</div>
+        <div class="demo-pill" onclick="loadSample('200')">₹200</div>
+        <div class="demo-pill" onclick="loadSample('500')">₹500</div>
+      </div>
+    </div>
+
+    <!-- Scanning / Inference Loading Indicator -->
+    <div class="loading-card" id="loadingCard">
+      <div class="spinner"></div>
+      <div style="font-size: 0.95rem; font-weight: 600;">Analyzing Banknote...</div>
+      <div style="font-size: 0.8rem; color: var(--text-muted);">Running ResNet-34 deep learning inference</div>
+    </div>
+
+    <!-- Recognition Result Card -->
+    <div class="result-card" id="resultCard">
+      <div class="result-header">
+        <div class="denom-badge">
+          <span class="denom-symbol" id="resSymbol">₹500</span>
+          <span class="denom-unit" id="resName">Five Hundred Rupees</span>
+        </div>
+        <div class="confidence-badge">
+          <div class="confidence-val" id="resConfidence">98.4%</div>
+          <div class="confidence-label">Confidence</div>
+        </div>
+      </div>
+
+      <!-- Banknote Specifications -->
+      <div class="spec-grid">
+        <div class="spec-item">
+          <div class="spec-key">Base Color</div>
+          <div class="spec-val" id="resColor">Stone Grey</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-key">Dimensions</div>
+          <div class="spec-val" id="resDimensions">66 mm x 150 mm</div>
+        </div>
+        <div class="spec-item" style="grid-column: span 2;">
+          <div class="spec-key">Reverse Motif</div>
+          <div class="spec-val" id="resMotif">Red Fort with Indian flag</div>
+        </div>
+        <div class="spec-item" style="grid-column: span 2;">
+          <div class="spec-key">Bleed Lines (Tactile)</div>
+          <div class="spec-val" id="resBleed">5 angular bleed lines on both margins</div>
+        </div>
+      </div>
+
+      <!-- Denomination Probabilities -->
+      <div class="prob-section">
+        <div class="section-title">📊 Denomination Distribution</div>
+        <div id="probBars"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    RupeeLens &bull; Indian Currency Classifier &bull; PyTorch ResNet-34
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

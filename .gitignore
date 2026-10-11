@@ -1,14 +1,8 @@
-# ==========================================
-# Indian Currency AI - Git Ignore Configuration
-# ==========================================
-
 # Environments & Virtual Envs
 venv/
 env/
 .venv/
 ENV/
-env.bak/
-venv.bak/
 
 # Byte-compiled / Python artifacts
 __pycache__/
@@ -17,31 +11,10 @@ __pycache__/
 *.so
 .Python
 
-# Large Datasets & Images (Store raw datasets on Drive/Cloud)
-dataset/denomination/*
-!dataset/denomination/.gitkeep
-dataset/authenticity/*
-!dataset/authenticity/.gitkeep
-*.png
-*.jpg
-*.jpeg
-*.bmp
-*.tiff
-
-# Large Trained Model Binaries
-models/*
-!models/.gitkeep
-*.h5
-*.keras
-*.pb
-*.onnx
-*.tflite
-*.pkl
-*.joblib
-
-# Jupyter Notebook Checkpoints
-.ipynb_checkpoints
-*/.ipynb_checkpoints/*
+# Bulk image datasets (keep repo lightweight)
+raw_data/
+data/
+dummy_test_data/
 
 # IDEs & System Files
 .vscode/
@@ -52,17 +25,7 @@ models/*
 Thumbs.db
 desktop.ini
 
-# Frontend / Web dependencies & builds
-node_modules/
-build/
-dist/
-.env
-.env.local
-
 # Temporary files & logs
 *.log
 temp_*
 scratch/
-results/*.png
-results/*.jpg
-!results/.gitkeep
